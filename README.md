@@ -2,12 +2,30 @@
 
 Build your own todo list website using Loco. Follow the step-by-step guide [here](<(https://loco.rs/blog/frontend-website/)>) to create it effortlessly.
 
+## DB setup
+
+```sql
+create role local with password 'loco';
+
+alter role loco with superuser, login;
+
+create database loco_app;
+```
+
 ## Run Locally
 
 Execute the following command to run your todo list website locally, serving static assets from `frontend/dist`:
 
 ```sh
 $ cargo loco start
+```
+
+## Run in Docker
+```bash
+# build
+docker build -t todo .
+# run
+docker run --rm -it -d -e DATABASE_URI=postgres://loco:loco@host.docker.internal/loco_app -p 3000:3000 -n todo todo start
 ```
 
 ## Build Client
